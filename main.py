@@ -36,7 +36,7 @@ def upload_zip():
 
         return 'File uploaded and unzipped successfully'
 
-    return render_template('index.html')
+    return 'we render ui here for file upload'
     
 @app.route('/populate',methods=['POST'])
 def populate():
