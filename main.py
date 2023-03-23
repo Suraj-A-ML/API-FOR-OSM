@@ -13,7 +13,7 @@ def ins_path():
   path = app.config['UPLOAD_FOLDER'] + '/'
   return os.path.join(path,'install_scaling_manager.yaml')
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/upload', methods=['GET', 'POST'])
 def upload_zip():
     if request.method == 'POST':
         
