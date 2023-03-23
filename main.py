@@ -58,39 +58,46 @@ def populate():
 @app.route('/install')
 def install_scaling_manager():	    
     command = ['sudo', 'ansible-playbook', '-i', inv_path() ,ins_path(), '--tags', "install" ,'-kK']
-    subprocess.run(command, check=True) 
+    subprocess.run(command) 
     return 'Scaling manager installation started.'
 
 @app.route('/start')
 def start_scaling_manager():    
     command = ['sudo', 'ansible-playbook', '-i', inv_path() ,ins_path(), '--tags', "start" ,'-kK']
-    subprocess.run(command, check=True) 
-    return 'Scaling manager started'
+    subprocess.run(command) 
+    return 'Scaling manager started.'
 
 @app.route('/stop')
 def stop_scaling_manager(): 
     command = ['sudo', 'ansible-playbook', '-i', inv_path() ,ins_path(), '--tags', "stop" ,'-kK']
-    subprocess.run(command, check=True) 
+    subprocess.run(command) 
     return 'Scaling manager stopped.'
 
 @app.route('/uninstall')
 def uninstall_scaling_manager():    
     command = ['sudo', 'ansible-playbook', '-i', inv_path() ,ins_path(), '--tags', "uninstall" ,'-kK']
-    subprocess.run(command, check=True) 
+    subprocess.run(command) 
     return 'Scaling manager is Uninstalled.'
 
 @app.route('/update')
 def update_scaling_manager():
     command = ['sudo', 'ansible-playbook', '-i', inv_path() ,ins_path(), '--tags', "update" ,'-kK']
-    subprocess.run(command, check=True) 
+    subprocess.run(command) 
     return 'Scaling manager is Updated.'
  
 #to develop a status end point
+@app.route('/status')
+def status_scaling_manager():
+    command = ['sudo', 'ansible-playbook', '-i', inv_path() ,ins_path(), '--tags', "status" ,'-kK']
+    subprocess.run(command) 
+    return 'Status is returned.'
+
+
     
 @app.route('/update_pem')
 def updatepem_scaling_manager():    
     command = ['sudo', 'ansible-playbook', '-i', inv_path() ,ins_path(), '--tags', "update_pem" ,'-kK']
-    subprocess.run(command, check=True) 
+    subprocess.run(command) 
     return 'Pem files is updated.'
         
     
