@@ -84,6 +84,8 @@ def update_scaling_manager():
     command = ['sudo', 'ansible-playbook', '-i', inv_path() ,ins_path(), '--tags', "update" ,'-kK']
     subprocess.run(command, check=True) 
     return 'Scaling manager is Updated.'
+ 
+#to develop a status end point
     
 @app.route('/update_pem')
 def updatepem_scaling_manager():    
