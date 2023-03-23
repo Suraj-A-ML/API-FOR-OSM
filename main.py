@@ -79,7 +79,7 @@ def uninstall_scaling_manager():
     subprocess.run(command) 
     return 'Scaling manager is Uninstalled.'
 
-@app.route('/update')
+@app.route('/update_config')
 def update_scaling_manager():
     command = ['sudo', 'ansible-playbook', '-i', inv_path() ,ins_path(), '--tags', "update" ,'-kK']
     subprocess.run(command) 
