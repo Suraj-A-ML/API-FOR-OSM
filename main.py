@@ -99,7 +99,7 @@ def status_scaling_manager():
 def updatepem_scaling_manager():
     command = ['sudo', 'ansible-playbook', '-i', inv_path() ,ins_path(), '--tags', "update_pem" ,'--key-file',pem_path(),'-e','src_bin_path="."']
     subprocess.run(command)
-    return 'Pem files is updatedd.'
+    return 'Pem files is updatedd. '
 
 
 
