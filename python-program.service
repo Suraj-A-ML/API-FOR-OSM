@@ -1,6 +1,7 @@
 [Unit]
-Description=Python Program
+Description= Flask application for Opensearch Scaling Manager
 After=network.target
+
 [Service]
 User=ubuntu
 WorkingDirectory=/usr/local/bin/main.py
