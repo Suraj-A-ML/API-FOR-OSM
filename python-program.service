@@ -1,0 +1,12 @@
+[Unit]
+Description= Flask application for Opensearch Scaling Manager
+After=network.target
+
+[Service]
+User=ubuntu
+WorkingDirectory=/usr/local/bin/main.py
+ExecStart=/usr/bin/python3 /usr/local/bin/main.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
