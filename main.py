@@ -56,8 +56,11 @@ def populate():
     os_user = request.get_json('os_user')
     os_pass = request.get_json('os_pass')
     command  = ['sudo', 'ansible-playbook', '-i', inv_path() ,ins_path(), '--tags', "populate_inventory_yaml" ,'-e master_node_ip={}'.format(master_ip),'-e os_user={}'.format(os_user),'-e os_pass={}'.format(os_pass)]
-    subprocess.run(command)
-    return "Scaling manager population is successful"
+    output = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    
+    json_output = json.dumps({'stdout': output.stdout.decode('utf-8')})
+    return json_output
+    
     
 @app.route('/install')
 def install_scaling_manager():
@@ -72,26 +75,34 @@ def install_scaling_manager():
 @app.route('/start')
 def start_scaling_manager():
     command = ['sudo', 'ansible-playbook', '-i', inv_path() ,ins_path(), '--tags', "start" ,'--key-file',pem_path(),'-e','src_bin_path="."']
-    subprocess.run(command)
-    return "Started"
+    output = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+    json_output = json.dumps({'stdout': output.stdout.decode('utf-8')})
+    return json_output
 
 @app.route('/stop')
 def stop_scaling_manager():
     command = ['sudo', 'ansible-playbook', '-i', inv_path() ,ins_path(), '--tags', "stop" ,'--key-file',pem_path(),'-e','src_bin_path="."']
-    subprocess.run(command)
-    return 'Scaling manager stopped.'
+    output = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+    json_output = json.dumps({'stdout': output.stdout.decode('utf-8')})
+    return json_output
 
 @app.route('/uninstall')
 def uninstall_scaling_manager():
     command = ['sudo', 'ansible-playbook', '-i', inv_path() ,ins_path(), '--tags', "uninstall" ,'--key-file',pem_path(),'-e','src_bin_path="."']
-    subprocess.run(command)
-    return 'Scaling manager is Uninstalled.'
+    output = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+    json_output = json.dumps({'stdout': output.stdout.decode('utf-8')})
+    return json_output
 
 @app.route('/update_config')
 def update_scaling_manager():
     command = ['sudo', 'ansible-playbook', '-i', inv_path() ,ins_path(), '--tags', "update" ,'--key-file',pem_path(),'-e','src_bin_path="."']
-    subprocess.run(command)
-    return 'Scaling manager is Updated.'
+    output = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+    json_output = json.dumps({'stdout': output.stdout.decode('utf-8')})
+    return json_output
 
 #to develop a status end poin
 @app.route('/status')
@@ -100,15 +111,19 @@ def status_scaling_manager():
     #ins_path ='/home/ubuntu/osm/install_scaling_manager.yaml'
     #pem_path = os.path.abspath("user-dev-aws-ssh.pem")
     command = ['sudo','ansible-playbook', '-i', inv_path() ,ins_path(), '--tags', "status" ,'--key-file',pem_path(),'-e','src_bin_path="."']
-    subprocess.run(command)
-    return 'Status is returned.'
+    output = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+    json_output = json.dumps({'stdout': output.stdout.decode('utf-8')})
+    return json_output
 
 
 @app.route('/update_pem')
 def updatepem_scaling_manager():
     command = ['sudo', 'ansible-playbook', '-i', inv_path() ,ins_path(), '--tags', "update_pem" ,'--key-file',pem_path(),'-e','src_bin_path="."']
-    subprocess.run(command)
-    return 'Pem files is updated.'
+    output = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+    json_output = json.dumps({'stdout': output.stdout.decode('utf-8')})
+    return json_output
 
 if __name__ == '__main__':
     app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(),"upload")
