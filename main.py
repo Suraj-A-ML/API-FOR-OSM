@@ -7,17 +7,16 @@ from flask import jsonify
 import itertools
 import re
 
-#coding = utf8
+
 app = Flask(__name__)
 def inv_path():
-  #path = app.config['UNZIP_FOLDER'] + '/'
-  #return os.path.join(path,'inventory.yaml')
-  return '/home/ubuntu/osm/inventory.yaml'
+  path = app.config['UNZIP_FOLDER'] + '/'
+  return os.path.join(path,'install_scaling_manager.yaml')
 
 def ins_path():
-  #path = app.config['UNZIP_FOLDER'] + '/'
-  #return os.path.join(path,'install_scaling_manager.yaml')
-  return '/home/ubuntu/osm/install_scaling_manager.yaml'
+  path = app.config['OSM_FOLDER'] + '/'
+  return os.path.join(path,'install_scaling_manager.yaml')
+
 
 def pem_path():
   return os.path.abspath("user-dev-aws-ssh.pem")
@@ -59,35 +58,21 @@ def populate():
     
     return output
     
-#@app.route('/ans',methods=['GET','POST'])
-#def ans():
-#       res = subprocess.run(['ansible','--version'])
-#       print(res.stdout)
-#       print(res.stderr)
-#       return "done"
+
 
 @app.route('/install')
 def install_scaling_manager():
-
-
     command = ['sudo', 'ansible-playbook', '-i', inv_path(), ins_path(), '--tags', 'install', '--key-file', pem_path(), '-e', 'src_bin_path="."']
     output = subprocess.check_output(command)
-
-    
     return output
     
  
+=
 @app.route('/start')
 def start_scaling_manager():
-    
     command = ['sudo', 'ansible-playbook', '-i', inv_path() ,ins_path(), '--tags', "start" ,'--key-file',pem_path(),'-e','src_bin_path="."']
     output = subprocess.check_output(command)
-    
-
     return output
-    
-
-    
 
 @app.route('/stop')
 def stop_scaling_manager():
@@ -117,10 +102,8 @@ def update_scaling_manager():
 #to develop a status end point
 @app.route('/status')
 def status_scaling_manager():
-    #inv_path ='/home/ubuntu/osm/inventory.yaml'
-    #ins_path ='/home/ubuntu/osm/install_scaling_manager.yaml'
-    #pem_path = os.path.abspath("user-dev-aws-ssh.pem")
     command = ['sudo','ansible-playbook', '-i', inv_path() ,ins_path(), '--tags', "status" ,'--key-file',pem_path(),'-e','src_bin_path="."']
+
     output = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
    
     json_output1 = json.dumps(output.stdout.decode('utf-8').splitlines()[36:48],skipkeys=True,indent =4)
@@ -160,6 +143,7 @@ def status_scaling_manager():
     return finalres
               
 
+
 @app.route('/update_pem')
 def updatepem_scaling_manager():
     command = ['sudo', 'ansible-playbook', '-i', inv_path() ,ins_path(), '--tags', "update_pem" ,'--key-file',pem_path(),'-e','src_bin_path="."']
@@ -171,14 +155,12 @@ def updatepem_scaling_manager():
 
 
 
+
 if __name__ == '__main__':
-    app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(),"upload")
-    app.config['UNZIP_FOLDER'] = os.path.join(os.getcwd(),"unzipped")
-    os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
-    os.makedirs(app.config['UNZIP_FOLDER'], exist_ok=True)
-    app.run(debug=True,host="0.0.0.0")
-
-
-
-
+    app.config['UPLOAD_FOLDER'] = "/home/ubuntu/uploads"
+    app.config['OSM_FOLDER'] = "/home/ubuntu/osm"
+    mode = 0o766
+    os.makedirs(app.config['UPLOAD_FOLDER'], mode=mode, exist_ok=True)
+    os.makedirs(app.config['OSM_FOLDER'],mode=mode, exist_ok=True)
+    app.run(debug=True)
 
