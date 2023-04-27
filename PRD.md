@@ -191,6 +191,3 @@ sudo ansible-playbook -i inventory.yaml install_scaling_manager.yaml --tags "upd
 ```
 sudo ansible-playbook -i inventory.yaml install_scaling_manager.yaml --tags "uninstall" --key-file USERPEMFILEPATH.pem -e src_bin_path="."
 ```
-
-
-
