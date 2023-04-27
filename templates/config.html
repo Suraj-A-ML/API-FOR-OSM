@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Long Form Example</title>
+</head>
+
+<body>
+    <form method="POST" action="">
+        <fieldset name="user_config">
+            <legend>User configuration</legend>
+
+            <label for="monitor_with_logs">Monitor With Logs:</label><br /><br />
+            <input type="radio" id="true" name="monitor_with_logs" checked />
+            <label for="true">True</label><br />
+            <input type="radio" id="false" name="monitor_with_logs" />
+            <label for="false">False</label><br />
+
+            <label for="monitor_with_simulator">Monitor With Simulator:</label><br /><br />
+            <input type="radio" id="true" name="monitor_with_simulator" value="true" />
+            <label for="true">True</label><br />
+            <input type="radio" id="false" name="monitor_with_simulator" value="false" checked />
+            <label for="false">False</label><br />
+
+            <label for="purge_old_docs_after_hours">Purge Old Document After Hours:</label><br /><br />
+            <input type="number" id="purge_old_docs_after_hours" name="purge_old_docs_after_hours" /><br />
+
+            <label for="recommendation_polling_interval_in_secs">Recommendation Polling Interval In
+                Secs:</label><br /><br />
+            <input type="number" id="recommendation_polling_interval_in_secs"
+                name="recommendation_polling_interval_in_secs" /><br />
+
+            <label for="fetchmetrics_polling_interval_in_secs">Fetchmetrics Polling Interval In
+                Secs:</label><br /><br />
+            <input type="number" id="fetchmetrics_polling_interval_in_secs"
+                name="fetchmetrics_polling_interval_in_secs" /><br />
+
+            <label for="is_accelerated">Is accelerated:</label><br /><br />
+            <input type="radio" id="true" name="is_accelerated" value="true" />
+            <label for="true">True</label><br />
+            <input type="radio" id="false" name="is_accelerated" value="false" checked />
+            <label for="false">False</label><br />
+        </fieldset>
+
+        <fieldset name="cluster_details">
+            <legend>Cluster Details</legend>
+
+            <label for="cluster_name">Cluster Name:</label><br /><br />
+            <input type="text" id="cluster_name" name="cluster_name"  /><br />
+
+            <label for="cloud_type">Cloud Type:</label><br /><br />
+            <input type="text" id="cloud_type" name="cloud_type"  /><br />
+
+            <label for="max_nodes_allowed">Max Node Allowed:</label><br /><br />
+            <input type="number" id="max_nodes_allowed" name="max_nodes_allowed" value="max_nodes_allowed" /><br />
+
+            <label for="min_nodes_allowed">Min Node Allowed:</label><br /><br />
+            <input type="number" id="min_nodes_allowed" name="min_nodes_allowed" value="min_nodes_allowed" /><br />
+
+            <label for="launch_template_id">Launch Template Id:</label><br /><br />
+            <input type="text" id="launch_template_id" name="launch_template_id"  /><br />
+
+            <label for="launch_template_version">Launch Template Version:</label><br /><br />
+            <input type="text" id="launch_template_version" name="launch_template_version"
+                 /><br />
+            <label for="os_user">OS User:</label><br /><br />
+            <input type="text" id="os_user" name="os_user"  /><br />
+
+            <label for="os_group">OS Group:</label><br /><br />
+            <input type="text" id="os_group" name="os_group"  /><br />
+
+            <label for="os_version">OS Version:</label><br /><br />
+            <input type="text" id="os_version" name="os_version"  /><br />
+
+            <label for="os_home">OS Home:</label><br /><br />
+            <input type="text" id="os_home" name="os_home"  /><br />
+
+            <label for="domain_name">Domain Name:</label><br /><br />
+            <input type="text" id="domain_name" name="domain_name"  /><br />
+
+            <fieldset name="os_credentials">
+                <legend>OS Credentials:</legend>
+
+                <label for="os_admin_username">OS Admin Name:</label><br /><br />
+                <input type="text" id="os_admin_username" name="os_admin_username"  /><br />
+
+                <label for="os_admin_password">OS Password Name:</label><br /><br />
+                <input type="password" id="os_admin_password" name="os_admin_password"
+                     /><br />
+            </fieldset>
+
+            <fieldset name="cloud_credentials">
+                <legend>Cloud Credentials:</legend>
+
+                <label for="pem_file_path">Pem File Path:</label><br /><br />
+                <input type="text" id="pem_file_path" name="pem_file_path"  /><br />
+
+                <label for="secret_key">Secret Key:</label><br /><br />
+                <input type="text" id="secret_key" name="secret_key"  /><br />
+
+                <label for="access_key">Access Key:</label><br /><br />
+                <input type="text" id="access_key" name="access_key"  /><br />
+
+                <label for="region">Region:</label><br /><br />
+                <input type="text" id="region" name="region"  /><br />
+
+                <label for="role_arn">Role ARN:</label><br /><br />
+                <input type="text" id="role_arn" name="role_arn"  /><br />
+            </fieldset>
+
+            <label for="jvm_factor">Jvm Factor:</label><br /><br />
+            <input type="text" id="jvm_factor" name="jvm_factor"  /><br />
+        </fieldset>
+
+        <fieldset name="task_details">
+            <legend>Task Details:</legend>
+            <div id="task-info">
+                <div class="task-group">
+                    <label for="task_name">Task Name:</label><br />
+                    <input type="radio" id="scale_up_by_1" name="task_name" checked />
+                    <label for="scale_up_by_1">Scale Up By One</label><br />
+                    <input type="radio" id="scale_down_by_1" name="task_name" />
+                    <label for="scale_down_by_1">Scale Down By One</label><br />
+
+                    <label for="operator">Operator:</label><br />
+                    <input type="checkbox" name="AND" id="AND" value="AND" />
+                    <label for="AND">AND</label><br />
+                    <input type="checkbox" name="OR" id="OR" value="OR" />
+                    <label for="OR">OR</label><br />
+                    <input type="checkbox" name="EVENT" id="EVENT" value="EVENT" />
+                    <label for="EVENT">EVENT</label><br />
+                    <div id="rule-info">
+                        <div class="rule-group">
+                        </div>
+                    </div>
+                    <button type="button" id="add-rule">Add Rule</button><br />
+                    <button type="button" class="remove-task">Remove Task</button>
+                </div>
+            </div>
+            <button type="button" id="add-task">Add Task</button><br />
+            <button type="submit" name="submit">Submit</button>
+        </fieldset>
+    </form>
+
+    <script>
+        const addTaskbtn = document.getElementById("add-task");
+        const taskInfo = document.getElementById("task-info");
+        const addRuleBtn = document.getElementById("add-rule");
+        const ruleInfo = document.getElementById("rule-info");
+
+        function addTaskGroup(e) {
+            e.preventDefault();
+            const taskGroup = document.createElement("div");
+            taskGroup.classList.add("task-group");
+            taskGroup.innerHTML =
+                `<label for="task_name">Task Name:</label><br>
+                      <input type="radio" id="scale_up_by_1" name="task_name" value="scale_up_by_1" checked>
+                      <label for="scale_up_by_1">Scale Up By One</label><br>
+                      <input type="radio" id="scale_down_by_1" name="task_name" value="scale_down_by_1">
+                      <label for="scale_down_by_1">Scale Down By One</label><br>
+
+                      <label for="operator">Operator:</label><br>
+                      <input type="checkbox" name="AND" id="AND" value="AND">
+                      <label for="AND">AND</label><br>
+                      <input type="checkbox" name="OR" id="OR" value="OR">
+                      <label for="OR">OR</label><br>
+                      <input type="checkbox" name="EVENT" id="EVENT" value="EVENT">
+                      <label for="EVENT">EVENT</label><br>
+
+                      <div id="rule-info">
+                          <div class="rule-group">
+                          </div>
+                      </div>
+                      <button type="button" id="add-rule">Add Rule</button><br>
+                      <button type="button" class="remove-task">Remove Task</button>
+              `;
+            taskInfo.appendChild(taskGroup);
+        }
+
+        function removeTaskGroup(event) {
+            const taskGroup = event.target.closest(".task-group");
+            taskInfo.removeChild(taskGroup);
+        }
+
+        function addRuleGroup(event) {
+            const taskGroup = event.target.closest(".task-group");
+            const ruleGroup = document.createElement("div");
+            ruleGroup.classList.add("rule-group");
+            let ruleGroupHTML = `
+            <label for="metric">Metric:</label><br>
+            <input type="text" name="metric" id="metric" /><br><br>
+            <label for="limit">Limit:</label><br>
+            <input type="text" name="limit" id="limit" /><br><br>
+            <label for="stat">Stat:</label><br>
+            <input type="text" name="stat" id="stat" /><br><br>
+            <label for="decision_period">Decision Period:</label><br>
+            <input type="text" name="decision_period" id="decision_period" /><br><br>
+            <label for="occurrences_percent">Occurrences Percent:</label><br>
+            <input type="text" name="occurrences_percent" id="occurrences_percent" /><br><br>
+            <button type="button" class="remove-rule">Remove</button>
+  `;
+            if (taskGroup.querySelector('input[name="EVENT"]:checked')) {
+                ruleGroupHTML = `
+                <label for="scheduling_time">Scheduling Time:</label>
+                <input type="text" name="scheduling_time" id="scheduling_time" />
+                <button type="button" class="remove-rule">Remove</button>
+    `;
+            }
+            ruleGroup.innerHTML = ruleGroupHTML;
+            taskGroup.querySelector("#rule-info").appendChild(ruleGroup);
+        }
+
+
+        function removeRuleGroup(event) {
+            const taskGroup = event.target.closest(".task-group");
+            const ruleGroup = event.target.closest(".rule-group");
+            taskGroup.querySelector("#rule-info").removeChild(ruleGroup);
+        }
+
+        addTaskbtn.addEventListener("click", addTaskGroup);
+        taskInfo.addEventListener("click", (event) => {
+            if (event.target.classList.contains("remove-task")) {
+                removeTaskGroup(event);
+            }
+            if (event.target.id === "add-rule") {
+                addRuleGroup(event);
+            }
+            if (event.target.classList.contains("remove-rule")) {
+                removeRuleGroup(event);
+
+            }
+        });
+
+    </script>
+</body>
+
+</html>

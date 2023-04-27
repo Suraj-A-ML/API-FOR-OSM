@@ -1,7 +1,8 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template,redirect
 import os 
 import zipfile
 import subprocess
+import yaml
 
 
 app = Flask(__name__)
@@ -38,13 +39,14 @@ def upload_zip():
 
     return 'we render ui here for file upload'
     
-@app.route('/populate',methods=['POST'])
+@app.route('/populate',methods=['GET','POST'])
 def populate():
-    master_ip = request.get_json('master_ip')
-    os_user = request.get_json('os_user')
-    os_pass = request.get_json('os_pass')
-    command  = ['sudo', 'ansible-playbook', '-i', inv_path() ,ins_path(), '--tags', "populate_inventory_yaml" ,'-e master_node_ip={}'.format(master_ip),'-e os_user={}'.format(os_user),'-e os_pass={}'.format(os_pass),'-kK']
-    subprocess.run(command)
+    # params = request.get_json(force=True)
+    # master_ip = params['master_ip']
+    # os_user = params['os_user']
+    # os_pass = params['os_pass']
+    # command  = ['sudo', 'ansible-playbook', '-i', inv_path() ,ins_path(), '--tags', "populate_inventory_yaml" ,'-e master_node_ip={}'.format(master_ip),'-e os_user={}'.format(os_user),'-e os_pass={}'.format(os_pass)]
+    # subprocess.run(command)
     return "Scaling manager population is successful"
 
 
@@ -57,52 +59,52 @@ def populate():
 
 @app.route('/install')
 def install_scaling_manager():	    
-    command = ['sudo', 'ansible-playbook', '-i', inv_path() ,ins_path(), '--tags', "install" ,'-kK']
-    subprocess.run(command) 
+    # command = ['sudo', 'ansible-playbook', '-i', inv_path() ,ins_path(), '--tags', "install" ,'-kK']
+    # subprocess.run(command) 
     return 'Scaling manager installation started.'
 
 @app.route('/start')
 def start_scaling_manager():    
-    command = ['sudo', 'ansible-playbook', '-i', inv_path() ,ins_path(), '--tags', "start" ,'-kK']
-    subprocess.run(command) 
+    # command = ['sudo', 'ansible-playbook', '-i', inv_path() ,ins_path(), '--tags', "start" ,'-kK']
+    # subprocess.run(command) 
     return 'Scaling manager started.'
 
 @app.route('/stop')
 def stop_scaling_manager(): 
-    command = ['sudo', 'ansible-playbook', '-i', inv_path() ,ins_path(), '--tags', "stop" ,'-kK']
-    subprocess.run(command) 
+    # command = ['sudo', 'ansible-playbook', '-i', inv_path() ,ins_path(), '--tags', "stop" ,'-kK']
+    # subprocess.run(command) 
     return 'Scaling manager stopped.'
 
 @app.route('/uninstall')
 def uninstall_scaling_manager():    
-    command = ['sudo', 'ansible-playbook', '-i', inv_path() ,ins_path(), '--tags', "uninstall" ,'-kK']
-    subprocess.run(command) 
+    # command = ['sudo', 'ansible-playbook', '-i', inv_path() ,ins_path(), '--tags', "uninstall" ,'-kK']
+    # subprocess.run(command) 
     return 'Scaling manager is Uninstalled.'
 
 @app.route('/update_config')
 def update_scaling_manager():
-    command = ['sudo', 'ansible-playbook', '-i', inv_path() ,ins_path(), '--tags', "update" ,'-kK']
-    subprocess.run(command) 
+    # command = ['sudo', 'ansible-playbook', '-i', inv_path() ,ins_path(), '--tags', "update" ,'-kK']
+    # subprocess.run(command) 
     return 'Scaling manager is Updated.'
  
 #to develop a status end point
 @app.route('/status')
 def status_scaling_manager():
-    command = ['sudo', 'ansible-playbook', '-i', inv_path() ,ins_path(), '--tags', "status" ,'-kK']
-    subprocess.run(command) 
+    # command = ['sudo', 'ansible-playbook', '-i', inv_path() ,ins_path(), '--tags', "status" ,'-kK']
+    # subprocess.run(command) 
     return 'Status is returned.'
 
 
     
 @app.route('/update_pem')
 def updatepem_scaling_manager():    
-    command = ['sudo', 'ansible-playbook', '-i', inv_path() ,ins_path(), '--tags', "update_pem" ,'-kK']
-    subprocess.run(command) 
+    # command = ['sudo', 'ansible-playbook', '-i', inv_path() ,ins_path(), '--tags', "update_pem" ,'-kK']
+    # subprocess.run(command) 
     return 'Pem files is updated.'
         
-    
-    
 
+
+    
 if __name__ == '__main__':
     app.config['UPLOAD_FOLDER'] = '/home/ubuntu/flask_app/uploads'
     app.config['UNZIP_FOLDER'] = '/home/ubuntu/flask_app/unzip'

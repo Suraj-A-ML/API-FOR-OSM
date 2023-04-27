@@ -1,0 +1,38 @@
+cluster_details:
+  cloud_credentials:
+    access_key: access_key
+    pem_file_path: pem_file_path
+    region: region
+    role_arn: role_arn
+    secret_key: secret_key
+  cloud_type: cloud_type
+  cluster_name: cluster_name
+  domain_name: domain_name
+  jvm_factor: jvm_factor
+  launch_template_id: launch_template_id
+  launch_template_version: launch_template_version
+  max_nodes_allowed: '10'
+  min_nodes_allowed: '3'
+  os_credentials:
+    os_admin_password: os_admin_password
+    os_admin_username: os_admin_username
+  os_group: os_group
+  os_home: os_home
+  os_user: os_user
+  os_version: '2001'
+task_details:
+  operator: null
+  rules:
+  - decision_period: '19'
+    limit: '4'
+    metric: cpu
+    occurrences_percent: '80'
+    stat: '2'
+  task_name: scale_down_by_1
+user_config:
+  fetchmetrics_polling_interval_in_secs: '999'
+  is_accelerated: 'on'
+  monitor_with_logs: 'on'
+  monitor_with_simulator: 'on'
+  purge_old_docs_after_hours: '10'
+  recommendation_polling_interval_in_secs: '100'
